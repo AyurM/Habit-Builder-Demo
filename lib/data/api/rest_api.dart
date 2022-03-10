@@ -1,4 +1,5 @@
 import 'package:habit_builder_demo/data/api/rest_api_interface.dart';
+import 'package:habit_builder_demo/data/model/sign_up_data.dart';
 import 'package:habit_builder_demo/data/model/user_profile.dart';
 
 const UserProfile _mockUser = UserProfile(
@@ -18,5 +19,9 @@ class RestApi implements IRestApi {
 
   @override
   Future<UserProfile?> login(String email, String password) =>
+      Future.delayed(const Duration(milliseconds: 500), () => _mockUser);
+
+  @override
+  Future<UserProfile?> signUp(SignUpData signUpData) =>
       Future.delayed(const Duration(milliseconds: 500), () => _mockUser);
 }

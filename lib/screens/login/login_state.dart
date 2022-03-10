@@ -51,14 +51,7 @@ class LoginForgotPassword extends LoginState {
   List<Object> get props => [message];
 }
 
-class LoginSignUp extends LoginState {
-  final String message;
-
-  const LoginSignUp(this.message);
-
-  @override
-  List<Object> get props => [message];
-}
+class LoginSignUp extends LoginState {}
 
 class LoginSuccessful extends LoginState {
   final UserProfile profile;

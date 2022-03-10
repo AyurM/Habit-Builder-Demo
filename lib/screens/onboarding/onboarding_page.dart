@@ -16,12 +16,6 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState
     extends BaseState<OnboardingPage, OnboardingCubit, OnboardingState> {
   @override
-  void initState() {
-    cubit.init();
-    super.initState();
-  }
-
-  @override
   Widget builder(BuildContext context, OnboardingState state) {
     final double spacing = MediaQuery.of(context).size.height * 0.09;
     final Widget whiteSpace = SizedBox(height: spacing);

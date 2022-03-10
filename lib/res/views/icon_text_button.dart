@@ -6,8 +6,10 @@ class IconTextButton extends StatelessWidget {
   final String iconPath;
   final void Function()? onPressed;
   final double borderRadius;
+  final double iconSpacing;
   final Size size;
   final Color? color;
+  final EdgeInsets margin;
 
   const IconTextButton(
       {Key? key,
@@ -15,14 +17,16 @@ class IconTextButton extends StatelessWidget {
       required this.iconPath,
       this.onPressed,
       this.borderRadius = 12.0,
+      this.iconSpacing = 16.0,
       this.size = const Size(double.infinity, kDefaultButtonHeight),
-      this.color = Colors.white})
+      this.color = Colors.white,
+      this.margin = kDefaultHorizontalPadding})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: kDefaultHorizontalPadding,
+      padding: margin,
       child: ElevatedButton.icon(
         style: ElevatedButton.styleFrom(
           elevation: 0,
@@ -36,7 +40,7 @@ class IconTextButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         icon: Padding(
-          padding: const EdgeInsets.only(right: 16),
+          padding: EdgeInsets.only(right: iconSpacing),
           child: Image.asset(iconPath, width: 23, height: 23),
         ),
         label: Text(text, style: Theme.of(context).textTheme.button),

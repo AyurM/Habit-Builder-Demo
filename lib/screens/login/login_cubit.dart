@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:habit_builder_demo/data/model/user_profile.dart';
 import 'package:habit_builder_demo/data/repositories/auth_repository.dart';
+import 'package:habit_builder_demo/utils/validation/form_validators.dart';
 
 part 'login_state.dart';
 
@@ -11,6 +12,11 @@ class LoginCubit extends Cubit<LoginState> {
         super(LoginInitial());
 
   late final AuthRepository _authRepository;
+
+  String? Function(String?) get emailValidator => FormValidator.emailValidator;
+
+  String? Function(String?) get passwordValidator =>
+      FormValidator.passwordValidator;
 
   Future<void> onLoginWithGoogle() async {
     emit(LoginLoading());
@@ -35,7 +41,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   void onForgotPassword() => emit(const LoginForgotPassword('Forgot password'));
 
-  void onSignUp() => emit(const LoginSignUp('Sign up'));
+  void onSignUp() => emit(LoginSignUp());
 
   void onHelpButtonPressed() => emit(LoginHelpButtonPressed());
 
@@ -50,19 +56,5 @@ class LoginCubit extends Cubit<LoginState> {
     } catch (error) {
       emit(LoginError(error.toString()));
     }
-  }
-
-  String? emailValidator(String? emailInput) {
-    if (emailInput == null || emailInput.isEmpty) {
-      return 'Please enter email';
-    }
-    return null;
-  }
-
-  String? passwordValidator(String? passwordInput) {
-    if (passwordInput == null || passwordInput.isEmpty) {
-      return "Password can't be empty";
-    }
-    return null;
   }
 }

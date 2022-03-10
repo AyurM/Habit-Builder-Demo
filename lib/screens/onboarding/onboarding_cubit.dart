@@ -14,7 +14,7 @@ class OnboardingPageData {
 class OnboardingCubit extends Cubit<OnboardingState> {
   OnboardingCubit() : super(OnboardingInitial());
 
-  late final PageController _controller;
+  final PageController _controller = PageController();
   PageController get controller => _controller;
 
   final List<OnboardingPageData> pageData = const [
@@ -31,10 +31,6 @@ class OnboardingCubit extends Cubit<OnboardingState> {
         title: 'Join a supportive community',
         imagePath: 'assets/images/onboarding_4.png'),
   ];
-
-  void init() {
-    _controller = PageController();
-  }
 
   void onSkip() => emit(OnboardingSkipPressed());
 

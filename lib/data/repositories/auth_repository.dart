@@ -1,5 +1,6 @@
 import 'package:habit_builder_demo/base/app_error.dart';
 import 'package:habit_builder_demo/data/api/rest_api_interface.dart';
+import 'package:habit_builder_demo/data/model/sign_up_data.dart';
 import 'package:habit_builder_demo/data/model/user_profile.dart';
 
 class AuthRepository {
@@ -28,6 +29,15 @@ class AuthRepository {
   Future<UserProfile> loginWithEmailAndPassword(
       String email, String password) async {
     final UserProfile? userProfile = await _restApi.login(email, password);
+    if (userProfile == null) {
+      throw const AppException(AppErrorType.unauthorized);
+    }
+
+    return userProfile;
+  }
+
+  Future<UserProfile> createAccount(SignUpData signUpData) async {
+    final UserProfile? userProfile = await _restApi.signUp(signUpData);
     if (userProfile == null) {
       throw const AppException(AppErrorType.unauthorized);
     }
