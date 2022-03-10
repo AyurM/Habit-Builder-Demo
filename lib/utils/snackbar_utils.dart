@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:habit_builder_demo/res/colors/colors.dart';
 
 extension ContextExtensions on BuildContext {
-  void showSnackBar(String text, {bool clear = false}) {
+  void showSnackBar(String text, {bool clear = true}) {
     if (clear) clearSnackBars();
     ScaffoldMessenger.of(this).showSnackBar(SnackBar(
         backgroundColor: twilight,

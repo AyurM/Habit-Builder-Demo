@@ -101,7 +101,7 @@ class _SignUpDivider extends StatelessWidget {
     final Widget divider = Expanded(child: Divider(color: color));
 
     return Padding(
-      padding: margin ?? kDefaultHorizontalPadding,
+      padding: margin ?? kDefaultHorizontalPaddingMedium,
       child: Row(children: [
         divider,
         Padding(
@@ -133,7 +133,7 @@ class _SignUpPageAuthOptions extends StatelessWidget {
     const double iconSpacing = 8;
 
     return Padding(
-      padding: margin ?? kDefaultHorizontalPadding,
+      padding: margin ?? kDefaultHorizontalPaddingMedium,
       child: Row(children: [
         Expanded(
           child: IconTextButton(
@@ -167,7 +167,7 @@ class _SignUpPageFooter extends StatelessWidget {
     final TextStyle? textStyle = Theme.of(context).textTheme.bodyText1;
 
     return Padding(
-      padding: margin ?? kDefaultHorizontalPadding,
+      padding: margin ?? kDefaultHorizontalPaddingMedium,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_builder_demo/res/theme/constants.dart';
 import 'package:habit_builder_demo/res/views/app_form_field.dart';
 import 'package:habit_builder_demo/res/views/primary_text_button.dart';
 
@@ -31,10 +32,6 @@ class _LoginPageFormState extends State<LoginPageForm> {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final ButtonStyle textButtonStyle = TextButton.styleFrom(
-        padding: const EdgeInsets.all(4),
-        minimumSize: Size.zero,
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap);
 
     return Container(
       width: double.infinity,
@@ -46,7 +43,7 @@ class _LoginPageFormState extends State<LoginPageForm> {
         key: _formKey,
         child: Column(children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
+            padding: const EdgeInsets.only(top: 8),
             child: Text('Log in with email', style: textTheme.bodyText2),
           ),
           Divider(color: colorScheme.background),
@@ -59,13 +56,12 @@ class _LoginPageFormState extends State<LoginPageForm> {
               keyboardType: TextInputType.emailAddress),
           const SizedBox(height: 8),
           AppFormField(
-            icon: Icons.lock_outline,
-            hint: 'Password',
-            validator: widget.passwordValidator,
-            controller: _passwordController,
-            backgroundColor: colorScheme.background,
-            isPassword: true,
-          ),
+              icon: Icons.lock_outline,
+              hint: 'Password',
+              validator: widget.passwordValidator,
+              controller: _passwordController,
+              backgroundColor: colorScheme.background,
+              isPassword: true),
           const SizedBox(height: 20),
           PrimaryTextButton(
               text: 'Login',
@@ -76,33 +72,58 @@ class _LoginPageFormState extends State<LoginPageForm> {
                 }
               }),
           const SizedBox(height: 16),
+          _LoginFormFooter(
+              onForgotPassword: widget.onForgotPassword,
+              onSignUp: widget.onSignUp)
+        ]),
+      ),
+    );
+  }
+}
+
+class _LoginFormFooter extends StatelessWidget {
+  final void Function()? onForgotPassword;
+  final void Function()? onSignUp;
+  final EdgeInsets? margin;
+
+  const _LoginFormFooter(
+      {Key? key, this.onForgotPassword, this.onSignUp, this.margin})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final TextStyle? textStyle = Theme.of(context).textTheme.bodyText1;
+    final ButtonStyle textButtonStyle = TextButton.styleFrom(
+        padding: const EdgeInsets.all(4),
+        minimumSize: Size.zero,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap);
+
+    return Padding(
+      padding: margin ?? kDefaultHorizontalPaddingMedium,
+      child: Column(
+        children: [
           TextButton(
-            onPressed: widget.onForgotPassword,
+            onPressed: onForgotPassword,
             style: textButtonStyle,
             child: Text('Forgot Password?',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    ?.copyWith(decoration: TextDecoration.underline)),
+                style:
+                    textStyle?.copyWith(decoration: TextDecoration.underline)),
           ),
           const SizedBox(height: 4),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text("Don't have an account? ", style: textTheme.bodyText1),
+              Text("Don't have an account? ", style: textStyle),
               TextButton(
-                onPressed: widget.onSignUp,
+                onPressed: onSignUp,
                 style: textButtonStyle,
                 child: Text('Sign up',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        ?.copyWith(fontWeight: FontWeight.bold)),
+                    style: textStyle?.copyWith(fontWeight: FontWeight.bold)),
               )
             ],
           ),
           const SizedBox(height: 28)
-        ]),
+        ],
       ),
     );
   }

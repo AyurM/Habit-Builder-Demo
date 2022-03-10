@@ -24,4 +24,8 @@ class RestApi implements IRestApi {
   @override
   Future<UserProfile?> signUp(SignUpData signUpData) =>
       Future.delayed(const Duration(milliseconds: 500), () => _mockUser);
+
+  @override
+  Future<bool?> sendResetPasswordLink(String email) =>
+      Future.delayed(const Duration(milliseconds: 500), () => true);
 }

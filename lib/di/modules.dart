@@ -5,6 +5,7 @@ import 'package:habit_builder_demo/data/repositories/auth_repository.dart';
 import 'package:habit_builder_demo/res/views/sign_up_form/sign_up_form_cubit.dart';
 import 'package:habit_builder_demo/screens/login/login_cubit.dart';
 import 'package:habit_builder_demo/screens/onboarding/onboarding_cubit.dart';
+import 'package:habit_builder_demo/screens/reset_password/reset_password_cubit.dart';
 import 'package:habit_builder_demo/screens/sign_up/sign_up_cubit.dart';
 
 final GetIt getIt = GetIt.instance;
@@ -26,6 +27,7 @@ void registerCubits() {
   getIt.registerFactory(() => LoginCubit(get()));
   getIt.registerFactory(() => SignUpCubit(get()));
   getIt.registerFactory(() => SignUpFormCubit());
+  getIt.registerFactory(() => ResetPasswordCubit(get()));
 }
 
 T get<T extends Object>() => getIt.get<T>();

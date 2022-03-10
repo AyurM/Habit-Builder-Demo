@@ -42,16 +42,13 @@ class LoginHelpButtonPressed extends LoginState {}
 
 class LoginHelpDialogClosed extends LoginState {}
 
-class LoginForgotPassword extends LoginState {
-  final String message;
+class LoginForgotPassword extends LoginState {}
 
-  const LoginForgotPassword(this.message);
-
-  @override
-  List<Object> get props => [message];
-}
+class LoginForgotPasswordPageClosed extends LoginState {}
 
 class LoginSignUp extends LoginState {}
+
+class LoginSignUpPageClosed extends LoginState {}
 
 class LoginSuccessful extends LoginState {
   final UserProfile profile;

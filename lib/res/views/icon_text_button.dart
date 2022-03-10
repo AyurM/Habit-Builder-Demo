@@ -20,7 +20,7 @@ class IconTextButton extends StatelessWidget {
       this.iconSpacing = 16.0,
       this.size = const Size(double.infinity, kDefaultButtonHeight),
       this.color = Colors.white,
-      this.margin = kDefaultHorizontalPadding})
+      this.margin = kDefaultHorizontalPaddingMedium})
       : super(key: key);
 
   @override

@@ -7,6 +7,7 @@ class PrimaryTextButton extends StatelessWidget {
   final double borderRadius;
   final Size size;
   final Color? color;
+  final EdgeInsets? margin;
 
   const PrimaryTextButton(
       {Key? key,
@@ -14,12 +15,13 @@ class PrimaryTextButton extends StatelessWidget {
       this.onPressed,
       this.borderRadius = 8.0,
       this.size = const Size(double.infinity, kDefaultButtonHeight),
-      this.color})
+      this.color,
+      this.margin})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: kDefaultHorizontalPadding,
+        padding: margin ?? kDefaultHorizontalPaddingMedium,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               elevation: 0,

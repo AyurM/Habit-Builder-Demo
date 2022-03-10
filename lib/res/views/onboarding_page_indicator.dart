@@ -21,7 +21,7 @@ class OnboardingPageIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: kDefaultButtonHeight,
-      padding: kDefaultHorizontalPadding,
+      padding: kDefaultHorizontalPaddingLarge,
       child: Row(
         children: [
           TextButton(

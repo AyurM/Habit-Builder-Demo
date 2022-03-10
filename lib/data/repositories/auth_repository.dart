@@ -44,4 +44,13 @@ class AuthRepository {
 
     return userProfile;
   }
+
+  Future<bool> sendResetLink(String email) async {
+    final bool? result = await _restApi.sendResetPasswordLink(email);
+    if (result == null) {
+      throw const AppException(AppErrorType.unauthorized);
+    }
+
+    return result;
+  }
 }

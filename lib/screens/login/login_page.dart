@@ -6,6 +6,7 @@ import 'package:habit_builder_demo/res/views/help_dialog.dart';
 import 'package:habit_builder_demo/res/views/icon_text_button.dart';
 import 'package:habit_builder_demo/res/views/login_form.dart';
 import 'package:habit_builder_demo/screens/login/login_cubit.dart';
+import 'package:habit_builder_demo/screens/reset_password/reset_password_page.dart';
 import 'package:habit_builder_demo/screens/sign_up/sign_up_page.dart';
 import 'package:habit_builder_demo/utils/snackbar_utils.dart';
 
@@ -46,7 +47,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginCubit, LoginState> {
   }
 
   @override
-  void listener(BuildContext context, LoginState state) {
+  Future<void> listener(BuildContext context, LoginState state) async {
     if (state is LoginContinueWithGoogle) {
       context.showSnackBar(state.profile.toString(), clear: true);
     }
@@ -62,12 +63,15 @@ class _LoginPageState extends BaseState<LoginPage, LoginCubit, LoginState> {
     }
 
     if (state is LoginForgotPassword) {
-      context.showSnackBar(state.message, clear: true);
+      await Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const ResetPasswordPage()));
+      cubit.onResetPasswordPageClosed();
     }
 
     if (state is LoginSignUp) {
-      Navigator.push(
+      await Navigator.push(
           context, MaterialPageRoute(builder: (context) => const SignUpPage()));
+      cubit.onSignUpPageClosed();
     }
 
     if (state is LoginSuccessful) {
@@ -168,7 +172,7 @@ class _LoginPageForeground extends StatelessWidget {
       child: Column(children: [
         const Expanded(child: SizedBox()),
         Padding(
-          padding: kDefaultHorizontalPadding,
+          padding: kDefaultHorizontalPaddingMedium,
           child: Text('Welcome to Monumental Habits',
               style: textTheme.headline1, textAlign: TextAlign.center),
         ),

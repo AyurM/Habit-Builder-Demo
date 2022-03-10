@@ -11,7 +11,7 @@ class LoginCubit extends Cubit<LoginState> {
       : _authRepository = authRepository,
         super(LoginInitial());
 
-  late final AuthRepository _authRepository;
+  final AuthRepository _authRepository;
 
   String? Function(String?) get emailValidator => FormValidator.emailValidator;
 
@@ -39,9 +39,13 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  void onForgotPassword() => emit(const LoginForgotPassword('Forgot password'));
+  void onForgotPassword() => emit(LoginForgotPassword());
+
+  void onResetPasswordPageClosed() => emit(LoginForgotPasswordPageClosed());
 
   void onSignUp() => emit(LoginSignUp());
+
+  void onSignUpPageClosed() => emit(LoginSignUpPageClosed());
 
   void onHelpButtonPressed() => emit(LoginHelpButtonPressed());
 

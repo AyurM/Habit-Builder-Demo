@@ -9,4 +9,6 @@ abstract class IRestApi {
   Future<UserProfile?> login(String email, String password);
 
   Future<UserProfile?> signUp(SignUpData signUpData);
+
+  Future<bool?> sendResetPasswordLink(String email);
 }

@@ -3,10 +3,10 @@ import 'package:habit_builder_demo/res/colors/colors.dart';
 import 'package:habit_builder_demo/res/theme/constants.dart';
 
 class AppFormField extends StatefulWidget {
-  final IconData icon;
+  final IconData? icon;
   final String hint;
   final Color? backgroundColor;
-  final EdgeInsets padding;
+  final EdgeInsets margin;
   final TextInputType? keyboardType;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
@@ -14,10 +14,10 @@ class AppFormField extends StatefulWidget {
 
   const AppFormField(
       {Key? key,
-      required this.icon,
+      this.icon,
       required this.hint,
       this.backgroundColor,
-      this.padding = kDefaultHorizontalPadding,
+      this.margin = kDefaultHorizontalPaddingMedium,
       this.keyboardType,
       this.controller,
       this.isPassword = false,
@@ -56,7 +56,7 @@ class _AppFormFieldState extends State<AppFormField> {
     final Color hintColor = eclipse.withOpacity(0.5);
 
     return Padding(
-      padding: widget.padding,
+      padding: widget.margin,
       child: TextFormField(
         validator: widget.validator,
         focusNode: focusNode,
@@ -65,8 +65,11 @@ class _AppFormFieldState extends State<AppFormField> {
         obscureText: isObscured,
         style: textTheme.button?.copyWith(color: colorScheme.primary),
         decoration: InputDecoration(
-          prefixIcon: Icon(widget.icon,
-              color: isFocused ? colorScheme.primary : hintColor),
+          prefixIcon: widget.icon == null
+              ? null
+              : _AppFormFieldIcon(
+                  iconData: widget.icon!,
+                  color: isFocused ? colorScheme.primary : hintColor),
           suffixIcon: widget.isPassword ? _passwordVisibilityButton() : null,
           filled: true,
           fillColor: widget.backgroundColor ?? Colors.white,
@@ -92,5 +95,39 @@ class _AppFormFieldState extends State<AppFormField> {
                 .textTheme
                 .bodyText1
                 ?.copyWith(decoration: TextDecoration.underline)),
+      );
+}
+
+class _AppFormFieldIcon extends StatelessWidget {
+  final IconData iconData;
+  final Color color;
+  final double spacing;
+  final Size size;
+
+  const _AppFormFieldIcon(
+      {Key? key,
+      required this.iconData,
+      required this.color,
+      this.spacing = 16.0,
+      this.size = const Size(48, 56)})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: size.width,
+            height: size.height,
+            decoration: BoxDecoration(
+                border: Border(
+                    right: BorderSide(
+                        color: Theme.of(context).colorScheme.background))),
+            child: Icon(iconData, color: color),
+          ),
+          SizedBox(
+            width: spacing,
+          )
+        ],
       );
 }

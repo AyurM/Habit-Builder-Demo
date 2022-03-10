@@ -11,7 +11,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       : _authRepository = authRepository,
         super(SignUpInitial());
 
-  late final AuthRepository _authRepository;
+  final AuthRepository _authRepository;
 
   Future<void> onLoginWithGoogle() async {
     emit(SignUpLoading());

@@ -100,7 +100,7 @@ class _OnboardingPageViewItem extends StatelessWidget {
   Widget build(BuildContext context) => Column(
         children: [
           Padding(
-            padding: kDefaultHorizontalPadding,
+            padding: kDefaultHorizontalPaddingLarge,
             child: Text(data.title,
                 style: Theme.of(context).textTheme.headline1,
                 textAlign: TextAlign.center),
@@ -121,7 +121,7 @@ class _OnboardingSubtitle extends StatelessWidget {
         Theme.of(context).textTheme.headline4?.copyWith(color: altTextColor);
 
     return Padding(
-        padding: kDefaultHorizontalPadding,
+        padding: kDefaultHorizontalPaddingLarge,
         child: RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
