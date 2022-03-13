@@ -17,9 +17,18 @@ TextTheme appTextTheme = TextTheme(
         fontSize: 18, fontWeight: FontWeight.bold, color: eclipse),
     headline4: GoogleFonts.manrope(
         fontSize: 17, fontWeight: FontWeight.bold, color: eclipse),
+    headline5: const TextStyle(
+        fontFamily: "Klasik",
+        fontSize: 18,
+        fontWeight: FontWeight.w400,
+        color: eclipse),
     bodyText1: GoogleFonts.manrope(
         fontSize: 14, fontWeight: FontWeight.w500, color: eclipse),
     bodyText2: GoogleFonts.manrope(
         fontSize: 16, fontWeight: FontWeight.w400, color: eclipse),
     button: GoogleFonts.manrope(
-        fontSize: 16, fontWeight: FontWeight.bold, color: eclipse));
+        fontSize: 16, fontWeight: FontWeight.bold, color: eclipse),
+    subtitle1: GoogleFonts.manrope(
+        fontSize: 12, fontWeight: FontWeight.bold, color: eclipse),
+    subtitle2: GoogleFonts.manrope(
+        fontSize: 10, fontWeight: FontWeight.bold, color: eclipse));

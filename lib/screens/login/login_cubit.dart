@@ -56,7 +56,7 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       final UserProfile userProfile =
           await _authRepository.loginWithEmailAndPassword(email, password);
-      emit(LoginContinueWithGoogle(userProfile));
+      emit(LoginSuccessful(userProfile));
     } catch (error) {
       emit(LoginError(error.toString()));
     }

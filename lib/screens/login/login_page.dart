@@ -5,6 +5,7 @@ import 'package:habit_builder_demo/res/theme/constants.dart';
 import 'package:habit_builder_demo/res/views/help_dialog.dart';
 import 'package:habit_builder_demo/res/views/icon_text_button.dart';
 import 'package:habit_builder_demo/res/views/login_form.dart';
+import 'package:habit_builder_demo/screens/home/home_page.dart';
 import 'package:habit_builder_demo/screens/login/login_cubit.dart';
 import 'package:habit_builder_demo/screens/reset_password/reset_password_page.dart';
 import 'package:habit_builder_demo/screens/sign_up/sign_up_page.dart';
@@ -49,11 +50,13 @@ class _LoginPageState extends BaseState<LoginPage, LoginCubit, LoginState> {
   @override
   Future<void> listener(BuildContext context, LoginState state) async {
     if (state is LoginContinueWithGoogle) {
-      context.showSnackBar(state.profile.toString(), clear: true);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
     }
 
     if (state is LoginContinueWithFacebook) {
-      context.showSnackBar(state.profile.toString(), clear: true);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
     }
 
     if (state is LoginHelpButtonPressed) {
@@ -75,7 +78,8 @@ class _LoginPageState extends BaseState<LoginPage, LoginCubit, LoginState> {
     }
 
     if (state is LoginSuccessful) {
-      context.showSnackBar(state.profile.toString(), clear: true);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
     }
 
     if (state is LoginError) {

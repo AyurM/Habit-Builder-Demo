@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:habit_builder_demo/base/base_state.dart';
-import 'package:habit_builder_demo/res/colors/colors.dart';
 import 'package:habit_builder_demo/res/theme/constants.dart';
 import 'package:habit_builder_demo/res/views/app_form_field.dart';
+import 'package:habit_builder_demo/res/views/app_icon_button.dart';
 import 'package:habit_builder_demo/res/views/primary_text_button.dart';
 import 'package:habit_builder_demo/screens/reset_password/reset_password_cubit.dart';
 import 'package:habit_builder_demo/utils/snackbar_utils.dart';
@@ -71,23 +71,13 @@ class _ResetPasswordPageBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerLeft,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20, top: 48),
-        child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(size / 2)),
-              primary: eclipse.withOpacity(0.1),
-              minimumSize: Size(size, size),
-              padding: const EdgeInsets.all(0),
-              alignment: Alignment.center,
-            ),
-            onPressed: () => Navigator.pop(context),
-            child: const Icon(Icons.arrow_back, color: eclipse)),
-      ),
-    );
+        alignment: Alignment.centerLeft,
+        child: Padding(
+            padding: const EdgeInsets.only(left: 20, top: 48),
+            child: AppIconButton(
+                size: size,
+                iconData: Icons.arrow_back,
+                onPressed: () => Navigator.pop(context))));
   }
 }
 
