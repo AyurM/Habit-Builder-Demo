@@ -1,49 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:habit_builder_demo/res/colors/colors.dart';
-import 'package:habit_builder_demo/utils/datetime_utils.dart';
 import 'package:intl/intl.dart';
 
-const double _defaultHeight = 50;
-
-class HabitListHeader extends StatelessWidget {
-  const HabitListHeader({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final List<DateTime> daysOfTheWeek = DateTime.now().getDaysOfTheWeek();
-
-    return Container(
-      height: _defaultHeight,
-      width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.only(left: 32),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 110,
-            child: Text('Habits'.toUpperCase(),
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    ?.copyWith(fontWeight: FontWeight.bold)),
-          ),
-          Expanded(
-            child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                scrollDirection: Axis.horizontal,
-                itemCount: 7,
-                itemBuilder: (context, index) {
-                  final DateTime day = daysOfTheWeek[index];
-                  return _HabitHeaderListItem(
-                      day: day, size: _defaultHeight, isSelected: day.isToday);
-                }),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class _HabitHeaderListItem extends StatelessWidget {
+class HabitDateItem extends StatelessWidget {
   static DateFormat dayFormat = DateFormat.E();
   static const Size _selectedMarkSize = Size(20, 3);
 
@@ -51,7 +10,7 @@ class _HabitHeaderListItem extends StatelessWidget {
   final double size;
   final bool isSelected;
 
-  const _HabitHeaderListItem(
+  const HabitDateItem(
       {Key? key,
       required this.day,
       required this.size,

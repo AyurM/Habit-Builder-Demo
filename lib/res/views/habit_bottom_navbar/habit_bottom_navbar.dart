@@ -64,16 +64,15 @@ class _NavButton extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) => IconButton(
-      icon: ColorFiltered(
-        colorFilter: _getColorFilter(),
-        child: Image.asset(
-          imagePath,
-          width: kDefaultIconButtonSize,
-          height: kDefaultIconButtonSize,
-        ),
-      ),
-      onPressed: onPressed);
+  Widget build(BuildContext context) => SizedBox.square(
+        dimension: kDefaultNavbarButtonSize,
+        child: IconButton(
+            icon: ColorFiltered(
+              colorFilter: _getColorFilter(),
+              child: Image.asset(imagePath),
+            ),
+            onPressed: onPressed),
+      );
 
   ColorFilter _getColorFilter() {
     if (isActive) {

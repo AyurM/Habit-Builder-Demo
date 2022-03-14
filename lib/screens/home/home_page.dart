@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:habit_builder_demo/base/base_state.dart';
 import 'package:habit_builder_demo/data/model/bottom_nav_data.dart';
-import 'package:habit_builder_demo/data/model/quote.dart';
 import 'package:habit_builder_demo/res/colors/colors.dart';
 import 'package:habit_builder_demo/res/theme/constants.dart';
 import 'package:habit_builder_demo/res/views/habit_app_bar.dart';
 import 'package:habit_builder_demo/res/views/habit_bottom_navbar/habit_bottom_navbar.dart';
-import 'package:habit_builder_demo/res/views/habit_list/habit_list_header.dart';
+import 'package:habit_builder_demo/res/views/habit_list/habit_list.dart';
 import 'package:habit_builder_demo/res/views/quote_view.dart';
 import 'package:habit_builder_demo/res/views/user_avatar.dart';
 import 'package:habit_builder_demo/screens/home/home_cubit.dart';
+import 'package:habit_builder_demo/utils/snackbar_utils.dart';
 
 class HomePage extends StatefulWidget {
   static const String title = 'Homepage';
@@ -21,16 +21,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends BaseState<HomePage, HomeCubit, HomeState> {
+  bool isBusy = false;
+
   @override
   Widget builder(BuildContext context, HomeState state) {
     final Widget userIcon = UserAvatar(
         imageUrl: 'https://randomuser.me/api/portraits/men/97.jpg',
         radius: kDefaultIconButtonSize / 2,
-        onPressed: () {});
-
-    const Quote quote = Quote(
-        text: 'We first make our habits, and then our habits make us.',
-        author: 'Anonymous');
+        onPressed: cubit.onProfilePressed);
 
     const List<BottomNavData> navData = [
       BottomNavData(imagePath: 'assets/images/nav_home.png'),
@@ -44,24 +42,42 @@ class _HomePageState extends BaseState<HomePage, HomeCubit, HomeState> {
           context: context,
           text: HomePage.title,
           leadingIcon: Icons.menu,
-          onLeadingPressed: () {},
+          onLeadingPressed: cubit.onMenuPressed,
           trailing: userIcon,
         ),
         body: Stack(
           children: [
             const _HomePageBackground(),
-            Column(children: [
-              Padding(
-                padding: EdgeInsets.all(kDefaultHorizontalPaddingMedium.left),
-                child: const QuoteView(quote: quote),
-              ),
-              const HabitListHeader()
-            ]),
-            _HomeFab(iconData: Icons.add, onPressed: () {})
+            _buildScaffoldBody(state),
+            if (state is! HomeLoading)
+              _HomeFab(iconData: Icons.add, onPressed: () {})
           ],
         ),
         extendBody: true,
         bottomNavigationBar: const HabitBottomNavBar(navData: navData));
+  }
+
+  Widget _buildScaffoldBody(HomeState state) {
+    if (state is HomeLoading) {
+      return Center(
+          child: CircularProgressIndicator(
+              color: Theme.of(context).colorScheme.primary));
+    }
+
+    return Column(children: [
+      Padding(
+        padding: EdgeInsets.all(kDefaultHorizontalPaddingMedium.left),
+        child: QuoteView(quote: cubit.quote),
+      ),
+      HabitList(habits: cubit.habits),
+    ]);
+  }
+
+  @override
+  void listener(BuildContext context, HomeState state) {
+    if (state is HomeError) {
+      context.showSnackBar('Error: ${state.message}', clear: true);
+    }
   }
 }
 
