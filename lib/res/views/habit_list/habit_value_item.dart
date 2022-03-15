@@ -5,22 +5,29 @@ class HabitValueItem extends StatelessWidget {
   final HabitFrequency value;
   final Color color;
   final double size;
+  final double borderWidth;
+  final EdgeInsets? margin;
 
   const HabitValueItem(
-      {Key? key, required this.value, required this.color, required this.size})
+      {Key? key,
+      required this.value,
+      required this.color,
+      required this.size,
+      this.borderWidth = 2,
+      this.margin})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) => Center(
         child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 1),
+            padding: margin ?? const EdgeInsets.symmetric(horizontal: 1),
             child: SizedBox(
-                width: size + 4,
-                height: size + 4,
+                width: size,
+                height: size,
                 child: Stack(alignment: Alignment.center, children: [
                   Container(
-                    width: size + 4,
-                    height: size + 4,
+                    width: size,
+                    height: size,
                     decoration: BoxDecoration(
                         color: color.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12)),
@@ -36,11 +43,14 @@ class HabitValueItem extends StatelessWidget {
       case HabitFrequency.seldom:
         return ClipPath(
             clipper: _HabitHalfValueItem(),
-            child: Container(width: size, height: size, color: color));
+            child: Container(
+                width: size - borderWidth * 2,
+                height: size - borderWidth * 2,
+                color: color));
       case HabitFrequency.often:
         return Container(
-          width: size,
-          height: size,
+          width: size - borderWidth * 2,
+          height: size - borderWidth * 2,
           decoration: BoxDecoration(
               color: color, borderRadius: BorderRadius.circular(12)),
         );
@@ -52,72 +62,72 @@ class _HabitHalfValueItem extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final Path path = Path();
-    final double _xScaling = size.width / 45;
-    final double _yScaling = size.height / 45;
-    path.lineTo(0 * _xScaling, 4.13594 * _yScaling);
+    final double _xScaling = size.width / 50;
+    final double _yScaling = size.height / 50;
+    path.lineTo(0 * _xScaling, 9.13594 * _yScaling);
     path.cubicTo(
       0 * _xScaling,
-      0.648916 * _yScaling,
+      5.648916 * _yScaling,
       4.15084 * _xScaling,
-      -1.16845 * _yScaling,
+      3.83155 * _yScaling,
       6.71312 * _xScaling,
-      1.19673 * _yScaling,
+      6.1967300000000005 * _yScaling,
     );
     path.cubicTo(
       6.71312 * _xScaling,
-      1.19673 * _yScaling,
+      6.1967300000000005 * _yScaling,
       26 * _xScaling,
-      19 * _yScaling,
+      24 * _yScaling,
       26 * _xScaling,
-      19 * _yScaling,
+      24 * _yScaling,
     );
     path.cubicTo(
       26 * _xScaling,
-      19 * _yScaling,
+      24 * _yScaling,
       43.8033 * _xScaling,
-      38.2869 * _yScaling,
+      43.2869 * _yScaling,
       43.8033 * _xScaling,
-      38.2869 * _yScaling,
+      43.2869 * _yScaling,
     );
     path.cubicTo(
       46.1685 * _xScaling,
-      40.8492 * _yScaling,
+      45.8492 * _yScaling,
       44.3511 * _xScaling,
-      45 * _yScaling,
+      50 * _yScaling,
       40.8641 * _xScaling,
-      45 * _yScaling,
+      50 * _yScaling,
     );
     path.cubicTo(
       40.8641 * _xScaling,
-      45 * _yScaling,
+      50 * _yScaling,
       12 * _xScaling,
-      45 * _yScaling,
+      50 * _yScaling,
       12 * _xScaling,
-      45 * _yScaling,
+      50 * _yScaling,
     );
     path.cubicTo(
       5.37258 * _xScaling,
-      45 * _yScaling,
+      50 * _yScaling,
       0 * _xScaling,
-      39.6274 * _yScaling,
+      44.6274 * _yScaling,
       0 * _xScaling,
-      33 * _yScaling,
+      38 * _yScaling,
     );
     path.cubicTo(
       0 * _xScaling,
-      33 * _yScaling,
+      38 * _yScaling,
       0 * _xScaling,
-      4.13594 * _yScaling,
+      9.13594 * _yScaling,
       0 * _xScaling,
-      4.13594 * _yScaling,
+      9.13594 * _yScaling,
     );
     path.cubicTo(
       0 * _xScaling,
-      4.13594 * _yScaling,
+      9.13594 * _yScaling,
       0 * _xScaling,
-      4.13594 * _yScaling,
+      9.13594 * _yScaling,
       0 * _xScaling,
-      4.13594 * _yScaling,
+      9.13594 * _yScaling,
     );
     return path;
   }

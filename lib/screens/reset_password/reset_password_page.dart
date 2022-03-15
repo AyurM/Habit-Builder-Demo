@@ -3,6 +3,7 @@ import 'package:habit_builder_demo/base/base_state.dart';
 import 'package:habit_builder_demo/res/theme/constants.dart';
 import 'package:habit_builder_demo/res/views/app_form_field.dart';
 import 'package:habit_builder_demo/res/views/app_icon_button.dart';
+import 'package:habit_builder_demo/res/views/app_loading_indicator.dart';
 import 'package:habit_builder_demo/res/views/primary_text_button.dart';
 import 'package:habit_builder_demo/screens/reset_password/reset_password_cubit.dart';
 import 'package:habit_builder_demo/utils/snackbar_utils.dart';
@@ -22,9 +23,7 @@ class _ResetPasswordPageState extends BaseState<ResetPasswordPage,
 
   Widget _buildScaffoldBody(ResetPasswordState state) {
     if (state is ResetPasswordLoading) {
-      return Center(
-          child: CircularProgressIndicator(
-              color: Theme.of(context).colorScheme.primary));
+      return const AppLoadingIndicator();
     }
 
     final double height = MediaQuery.of(context).size.height;

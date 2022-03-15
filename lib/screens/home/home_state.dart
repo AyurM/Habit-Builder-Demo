@@ -11,6 +11,10 @@ class HomeInitial extends HomeState {}
 
 class HomeLoading extends HomeState {}
 
+class HomeAddNewHabitPressed extends HomeState {}
+
+class HomeCancelNewHabit extends HomeState {}
+
 class HomeHabitsLoaded extends HomeState {
   final List<Habit> habits;
 

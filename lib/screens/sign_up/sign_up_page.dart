@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:habit_builder_demo/base/base_state.dart';
 import 'package:habit_builder_demo/res/colors/colors.dart';
 import 'package:habit_builder_demo/res/theme/constants.dart';
+import 'package:habit_builder_demo/res/views/app_loading_indicator.dart';
 import 'package:habit_builder_demo/res/views/icon_text_button.dart';
 import 'package:habit_builder_demo/res/views/sign_up_form/sign_up_form.dart';
 import 'package:habit_builder_demo/screens/sign_up/sign_up_cubit.dart';
@@ -21,9 +22,7 @@ class _SignUpPageState extends BaseState<SignUpPage, SignUpCubit, SignUpState> {
 
   Widget _buildScaffoldBody(SignUpState state) {
     if (state is SignUpLoading) {
-      return Center(
-          child: CircularProgressIndicator(
-              color: Theme.of(context).colorScheme.primary));
+      return const AppLoadingIndicator();
     }
     final Size size = MediaQuery.of(context).size;
 

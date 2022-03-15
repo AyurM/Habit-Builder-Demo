@@ -3,12 +3,14 @@ import 'package:habit_builder_demo/base/base_state.dart';
 import 'package:habit_builder_demo/data/model/bottom_nav_data.dart';
 import 'package:habit_builder_demo/res/colors/colors.dart';
 import 'package:habit_builder_demo/res/theme/constants.dart';
+import 'package:habit_builder_demo/res/views/app_loading_indicator.dart';
 import 'package:habit_builder_demo/res/views/habit_app_bar.dart';
 import 'package:habit_builder_demo/res/views/habit_bottom_navbar/habit_bottom_navbar.dart';
 import 'package:habit_builder_demo/res/views/habit_list/habit_list.dart';
 import 'package:habit_builder_demo/res/views/quote_view.dart';
 import 'package:habit_builder_demo/res/views/user_avatar.dart';
 import 'package:habit_builder_demo/screens/home/home_cubit.dart';
+import 'package:habit_builder_demo/screens/new_habit/new_habit_page.dart';
 import 'package:habit_builder_demo/utils/snackbar_utils.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,15 +23,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends BaseState<HomePage, HomeCubit, HomeState> {
-  bool isBusy = false;
-
   @override
   Widget builder(BuildContext context, HomeState state) {
-    final Widget userIcon = UserAvatar(
-        imageUrl: 'https://randomuser.me/api/portraits/men/97.jpg',
-        radius: kDefaultIconButtonSize / 2,
-        onPressed: cubit.onProfilePressed);
-
     const List<BottomNavData> navData = [
       BottomNavData(imagePath: 'assets/images/nav_home.png'),
       BottomNavData(imagePath: 'assets/images/nav_courses.png'),
@@ -40,28 +35,34 @@ class _HomePageState extends BaseState<HomePage, HomeCubit, HomeState> {
     return Scaffold(
         appBar: HabitAppBar(
           context: context,
-          text: HomePage.title,
-          leadingIcon: Icons.menu,
-          onLeadingPressed: cubit.onMenuPressed,
-          trailing: userIcon,
+          text: cubit.pageTitle,
+          leadingIcon: _getAppBarLeadingIcon(state),
+          onLeadingPressed: cubit.onAppBarLeadingPressed(state),
+          trailing: _buildAppBarTrailing(state),
         ),
         body: Stack(
           children: [
             const _HomePageBackground(),
             _buildScaffoldBody(state),
             if (state is! HomeLoading)
-              _HomeFab(iconData: Icons.add, onPressed: () {})
+              _HomeFab(
+                  iconData:
+                      state is HomeAddNewHabitPressed ? Icons.check : Icons.add,
+                  onPressed: cubit.onFabPressed(state))
           ],
         ),
+        resizeToAvoidBottomInset: false,
         extendBody: true,
         bottomNavigationBar: const HabitBottomNavBar(navData: navData));
   }
 
   Widget _buildScaffoldBody(HomeState state) {
     if (state is HomeLoading) {
-      return Center(
-          child: CircularProgressIndicator(
-              color: Theme.of(context).colorScheme.primary));
+      return const AppLoadingIndicator();
+    }
+
+    if (state is HomeAddNewHabitPressed) {
+      return NewHabitPage(formKey: cubit.formKey);
     }
 
     return Column(children: [
@@ -71,6 +72,25 @@ class _HomePageState extends BaseState<HomePage, HomeCubit, HomeState> {
       ),
       HabitList(habits: cubit.habits),
     ]);
+  }
+
+  Widget? _buildAppBarTrailing(HomeState state) {
+    if (state is HomeAddNewHabitPressed) {
+      return null;
+    }
+
+    return UserAvatar(
+        imageUrl: 'https://randomuser.me/api/portraits/men/97.jpg',
+        radius: kDefaultIconButtonSize / 2,
+        onPressed: cubit.onProfilePressed);
+  }
+
+  IconData _getAppBarLeadingIcon(HomeState state) {
+    if (state is HomeAddNewHabitPressed) {
+      return Icons.arrow_back;
+    }
+
+    return Icons.menu;
   }
 
   @override

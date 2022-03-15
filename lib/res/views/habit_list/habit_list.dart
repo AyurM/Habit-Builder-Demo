@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:habit_builder_demo/data/model/habit.dart';
 import 'package:habit_builder_demo/res/colors/colors.dart';
@@ -142,7 +140,7 @@ class _HabitValueRow extends StatelessWidget {
         child: Row(
           children: values
               .map((value) => HabitValueItem(
-                  value: value, color: color, size: _defaultHeaderHeight))
+                  value: value, color: color, size: _defaultHeaderHeight + 4))
               .toList(),
         ),
       );

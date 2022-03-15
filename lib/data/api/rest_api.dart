@@ -48,28 +48,30 @@ const List<Habit> _mockHabits = [
   ])
 ];
 
+const Duration _mockLoadingDuration = Duration(milliseconds: 750);
+
 class MockRestApi implements IRestApi {
   @override
   Future<UserProfile?> facebookAuth() =>
-      Future.delayed(const Duration(milliseconds: 500), () => _mockUser);
+      Future.delayed(_mockLoadingDuration, () => _mockUser);
 
   @override
   Future<UserProfile?> googleAuth() =>
-      Future.delayed(const Duration(milliseconds: 500), () => _mockUser);
+      Future.delayed(_mockLoadingDuration, () => _mockUser);
 
   @override
   Future<UserProfile?> login(String email, String password) =>
-      Future.delayed(const Duration(milliseconds: 500), () => _mockUser);
+      Future.delayed(_mockLoadingDuration, () => _mockUser);
 
   @override
   Future<UserProfile?> signUp(SignUpData signUpData) =>
-      Future.delayed(const Duration(milliseconds: 500), () => _mockUser);
+      Future.delayed(_mockLoadingDuration, () => _mockUser);
 
   @override
   Future<bool?> sendResetPasswordLink(String email) =>
-      Future.delayed(const Duration(milliseconds: 500), () => true);
+      Future.delayed(_mockLoadingDuration, () => true);
 
   @override
   Future<List<Habit>?> getHabitList(DateTime date) =>
-      Future.delayed(const Duration(milliseconds: 500), () => _mockHabits);
+      Future.delayed(_mockLoadingDuration, () => _mockHabits);
 }

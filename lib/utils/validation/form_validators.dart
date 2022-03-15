@@ -19,4 +19,11 @@ class FormValidator {
     }
     return null;
   }
+
+  static String? habitNameValidator(String? nameInput) {
+    if (nameInput == null || nameInput.isEmpty) {
+      return "Habit name can't be empty";
+    }
+    return null;
+  }
 }

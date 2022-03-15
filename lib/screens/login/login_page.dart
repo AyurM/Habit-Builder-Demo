@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:habit_builder_demo/base/base_state.dart';
 import 'package:habit_builder_demo/res/colors/colors.dart';
 import 'package:habit_builder_demo/res/theme/constants.dart';
+import 'package:habit_builder_demo/res/views/app_loading_indicator.dart';
 import 'package:habit_builder_demo/res/views/help_dialog.dart';
 import 'package:habit_builder_demo/res/views/icon_text_button.dart';
 import 'package:habit_builder_demo/res/views/login_form.dart';
@@ -25,9 +26,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginCubit, LoginState> {
 
   Widget _buildScaffoldBody(LoginState state) {
     if (state is LoginLoading) {
-      return Center(
-          child: CircularProgressIndicator(
-              color: Theme.of(context).colorScheme.primary));
+      return const AppLoadingIndicator();
     }
 
     return Stack(alignment: Alignment.center, children: [
