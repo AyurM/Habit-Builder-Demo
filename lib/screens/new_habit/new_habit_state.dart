@@ -14,3 +14,5 @@ class NewHabitHabitNamePressed extends NewHabitState {}
 class NewHabitCustomFrequencyPressed extends NewHabitState {}
 
 class NewHabitReminderPressed extends NewHabitState {}
+
+class NewHabitReminderDialogClosed extends NewHabitState {}

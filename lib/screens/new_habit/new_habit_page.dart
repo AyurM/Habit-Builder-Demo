@@ -6,6 +6,7 @@ import 'package:habit_builder_demo/res/views/app_switch_button.dart';
 import 'package:habit_builder_demo/res/views/new_habit/add_habit_action.dart';
 import 'package:habit_builder_demo/res/views/new_habit/habit_frequency_setting.dart';
 import 'package:habit_builder_demo/res/views/new_habit/habit_name_input.dart';
+import 'package:habit_builder_demo/res/views/reminder_bottom_sheet.dart/reminder_bottom_sheet.dart';
 import 'package:habit_builder_demo/screens/new_habit/new_habit_cubit.dart';
 
 const double _defaultSpacing = 8;
@@ -53,6 +54,21 @@ class _NewHabitPageState
         ),
       ]),
     );
+  }
+
+  @override
+  Future<void> listener(BuildContext context, NewHabitState state) async {
+    if (state is NewHabitReminderPressed) {
+      await showModalBottomSheet(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+          ),
+          backgroundColor: Colors.white,
+          context: context,
+          builder: (context) => const ReminderBottomSheet());
+      cubit.onReminderDialogClosed();
+    }
   }
 }
 

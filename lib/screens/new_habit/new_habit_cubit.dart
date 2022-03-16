@@ -27,5 +27,7 @@ class NewHabitCubit extends Cubit<NewHabitState> {
 
   void onReminderPressed() => emit(NewHabitReminderPressed());
 
+  void onReminderDialogClosed() => emit(NewHabitReminderDialogClosed());
+
   void onNotificationSettingChanged(bool value) {}
 }
