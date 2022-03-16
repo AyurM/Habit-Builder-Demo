@@ -21,6 +21,8 @@ class AppIconButton extends StatelessWidget {
         decoration: ShapeDecoration(
             shape: const CircleBorder(), color: eclipse.withOpacity(0.1)),
         child: IconButton(
-            icon: Icon(iconData, color: eclipse), onPressed: onPressed),
+            splashRadius: size * 0.67,
+            icon: Icon(iconData, color: eclipse),
+            onPressed: onPressed),
       );
 }
