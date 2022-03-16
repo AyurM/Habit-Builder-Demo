@@ -12,8 +12,10 @@ const double _defaultSpacing = 8;
 
 class NewHabitPage extends StatefulWidget {
   final GlobalKey<FormState> formKey;
+  final TextEditingController? controller;
 
-  const NewHabitPage({Key? key, required this.formKey}) : super(key: key);
+  const NewHabitPage({Key? key, required this.formKey, this.controller})
+      : super(key: key);
 
   @override
   State<NewHabitPage> createState() => _NewHabitPageState();
@@ -28,6 +30,7 @@ class _NewHabitPageState
       child: Column(children: [
         HabitNameInput(
             formKey: widget.formKey,
+            controller: widget.controller,
             nameValidator: cubit.nameValidator,
             onPressed: cubit.onHabitNamePressed),
         const SizedBox(height: _defaultSpacing),

@@ -37,8 +37,9 @@ class SignUpCubit extends Cubit<SignUpState> {
   Future<void> onCreateAccount(SignUpData signUpData) async {
     emit(SignUpLoading());
     try {
-      await _authRepository.createAccount(signUpData);
-      emit(SignUpCreatedAccount(signUpData));
+      final UserProfile userProfile =
+          await _authRepository.createAccount(signUpData);
+      emit(SignUpCreatedAccount(userProfile));
     } catch (error) {
       emit(SignUpError(error.toString()));
     }

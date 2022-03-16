@@ -5,6 +5,7 @@ extension ContextExtensions on BuildContext {
   void showSnackBar(String text, {bool clear = true}) {
     if (clear) clearSnackBars();
     ScaffoldMessenger.of(this).showSnackBar(SnackBar(
+        behavior: SnackBarBehavior.floating,
         backgroundColor: twilight,
         content: Text(text,
             style: Theme.of(this)

@@ -32,28 +32,32 @@ class _HomePageState extends BaseState<HomePage, HomeCubit, HomeState> {
       BottomNavData(imagePath: 'assets/images/nav_settings.png'),
     ];
 
-    return Scaffold(
-        appBar: HabitAppBar(
-          context: context,
-          text: cubit.pageTitle,
-          leadingIcon: _getAppBarLeadingIcon(state),
-          onLeadingPressed: cubit.onAppBarLeadingPressed(state),
-          trailing: _buildAppBarTrailing(state),
-        ),
-        body: Stack(
-          children: [
-            const _HomePageBackground(),
-            _buildScaffoldBody(state),
-            if (state is! HomeLoading)
-              _HomeFab(
-                  iconData:
-                      state is HomeAddNewHabitPressed ? Icons.check : Icons.add,
-                  onPressed: cubit.onFabPressed(state))
-          ],
-        ),
-        resizeToAvoidBottomInset: false,
-        extendBody: true,
-        bottomNavigationBar: const HabitBottomNavBar(navData: navData));
+    return WillPopScope(
+      onWillPop: cubit.onBackPressed,
+      child: Scaffold(
+          appBar: HabitAppBar(
+            context: context,
+            text: cubit.pageTitle,
+            leadingIcon: _getAppBarLeadingIcon(state),
+            onLeadingPressed: cubit.onAppBarLeadingPressed(state),
+            trailing: _buildAppBarTrailing(state),
+          ),
+          body: Stack(
+            children: [
+              const _HomePageBackground(),
+              _buildScaffoldBody(state),
+              if (state is! HomeLoading)
+                _HomeFab(
+                    iconData: state is HomeAddNewHabitPressed
+                        ? Icons.check
+                        : Icons.add,
+                    onPressed: cubit.onFabPressed(state))
+            ],
+          ),
+          resizeToAvoidBottomInset: false,
+          extendBody: true,
+          bottomNavigationBar: const HabitBottomNavBar(navData: navData)),
+    );
   }
 
   Widget _buildScaffoldBody(HomeState state) {
@@ -62,7 +66,8 @@ class _HomePageState extends BaseState<HomePage, HomeCubit, HomeState> {
     }
 
     if (state is HomeAddNewHabitPressed) {
-      return NewHabitPage(formKey: cubit.formKey);
+      return NewHabitPage(
+          formKey: cubit.formKey, controller: cubit.habitNameController);
     }
 
     return Column(children: [
@@ -97,6 +102,10 @@ class _HomePageState extends BaseState<HomePage, HomeCubit, HomeState> {
   void listener(BuildContext context, HomeState state) {
     if (state is HomeError) {
       context.showSnackBar('Error: ${state.message}', clear: true);
+    }
+
+    if (state is HomeNewHabitAdded) {
+      context.showSnackBar('Habit: ${state.name}', clear: true);
     }
   }
 }

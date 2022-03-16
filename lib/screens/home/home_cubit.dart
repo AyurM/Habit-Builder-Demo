@@ -17,6 +17,7 @@ class HomeCubit extends Cubit<HomeState> {
   final HabitRepository _habitRepository;
 
   final formKey = GlobalKey<FormState>();
+  final TextEditingController habitNameController = TextEditingController();
 
   final Quote quote = const Quote(
       text: 'We first make our habits, and then our habits make us.',
@@ -25,8 +26,7 @@ class HomeCubit extends Cubit<HomeState> {
   final List<Habit> _habits = [];
   List<Habit> get habits => _habits;
 
-  String _pageTitle = 'Homepage';
-  String get pageTitle => _pageTitle;
+  String get pageTitle => state.title;
 
   Future<void> init() async {
     emit(HomeLoading());
@@ -40,20 +40,17 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void onMenuPressed() => emit(const HomeMenuPressed('Menu pressed'));
+  void onMenuPressed() => emit(HomeMenuPressed());
 
-  void onProfilePressed() => emit(const HomeProfilePressed('Profile pressed'));
+  void onProfilePressed() => emit(HomeProfilePressed());
 
   void onAddNewHabit() {
-    _pageTitle = 'New Habit';
     formKey.currentState?.reset();
-    emit(HomeAddNewHabitPressed());
+    habitNameController.clear();
+    emit(const HomeAddNewHabitPressed());
   }
 
-  void onCancelNewHabit() {
-    _pageTitle = 'Homepage';
-    emit(HomeCancelNewHabit());
-  }
+  void onCancelNewHabit() => emit(HomeCancelNewHabit());
 
   void Function() onAppBarLeadingPressed(HomeState state) {
     if (state is HomeAddNewHabitPressed) {
@@ -64,7 +61,11 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void onSaveHabit() {
-    formKey.currentState?.validate();
+    final bool? isFormValid = formKey.currentState?.validate();
+    if (isFormValid ?? false) {
+      final String newHabitName = habitNameController.text;
+      emit(HomeNewHabitAdded(newHabitName));
+    }
   }
 
   void Function() onFabPressed(HomeState state) {
@@ -73,5 +74,13 @@ class HomeCubit extends Cubit<HomeState> {
     }
 
     return onAddNewHabit;
+  }
+
+  Future<bool> onBackPressed() async {
+    if (state is HomeAddNewHabitPressed) {
+      onCancelNewHabit();
+      return false;
+    }
+    return true;
   }
 }

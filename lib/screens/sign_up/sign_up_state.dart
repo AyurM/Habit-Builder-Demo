@@ -7,6 +7,15 @@ abstract class SignUpState extends Equatable {
   List<Object> get props => [];
 }
 
+abstract class SignUpSuccess extends SignUpState {
+  final UserProfile profile;
+
+  const SignUpSuccess(this.profile);
+
+  @override
+  List<Object> get props => [profile];
+}
+
 class SignUpInitial extends SignUpState {}
 
 class SignUpLoading extends SignUpState {}
@@ -20,29 +29,14 @@ class SignUpError extends SignUpState {
   List<Object> get props => [message];
 }
 
-class SignUpContinueWithGoogle extends SignUpState {
-  final UserProfile profile;
-
-  const SignUpContinueWithGoogle(this.profile);
-
-  @override
-  List<Object> get props => [profile];
+class SignUpContinueWithGoogle extends SignUpSuccess {
+  const SignUpContinueWithGoogle(UserProfile profile) : super(profile);
 }
 
-class SignUpContinueWithFacebook extends SignUpState {
-  final UserProfile profile;
-
-  const SignUpContinueWithFacebook(this.profile);
-
-  @override
-  List<Object> get props => [profile];
+class SignUpContinueWithFacebook extends SignUpSuccess {
+  const SignUpContinueWithFacebook(UserProfile profile) : super(profile);
 }
 
-class SignUpCreatedAccount extends SignUpState {
-  final SignUpData signUpData;
-
-  const SignUpCreatedAccount(this.signUpData);
-
-  @override
-  List<Object> get props => [signUpData];
+class SignUpCreatedAccount extends SignUpSuccess {
+  const SignUpCreatedAccount(UserProfile profile) : super(profile);
 }

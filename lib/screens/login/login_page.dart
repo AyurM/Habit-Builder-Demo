@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_builder_demo/base/base_state.dart';
+import 'package:habit_builder_demo/data/model/user_profile.dart';
 import 'package:habit_builder_demo/res/colors/colors.dart';
 import 'package:habit_builder_demo/res/theme/constants.dart';
 import 'package:habit_builder_demo/res/views/app_loading_indicator.dart';
@@ -25,7 +26,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginCubit, LoginState> {
       Scaffold(body: _buildScaffoldBody(state));
 
   Widget _buildScaffoldBody(LoginState state) {
-    if (state is LoginLoading) {
+    if (state is LoginLoading || state is LoginSuccess) {
       return const AppLoadingIndicator();
     }
 
@@ -48,12 +49,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginCubit, LoginState> {
 
   @override
   Future<void> listener(BuildContext context, LoginState state) async {
-    if (state is LoginContinueWithGoogle) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const HomePage()));
-    }
-
-    if (state is LoginContinueWithFacebook) {
+    if (state is LoginSuccess) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const HomePage()));
     }
@@ -71,14 +67,15 @@ class _LoginPageState extends BaseState<LoginPage, LoginCubit, LoginState> {
     }
 
     if (state is LoginSignUp) {
-      await Navigator.push(
+      final UserProfile? signUpResult = await Navigator.push(
           context, MaterialPageRoute(builder: (context) => const SignUpPage()));
-      cubit.onSignUpPageClosed();
-    }
 
-    if (state is LoginSuccessful) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const HomePage()));
+      if (signUpResult != null) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
+      } else {
+        cubit.onSignUpPageClosed();
+      }
     }
 
     if (state is LoginError) {

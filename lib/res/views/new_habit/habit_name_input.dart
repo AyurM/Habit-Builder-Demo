@@ -7,11 +7,16 @@ const double _defaultMarkerIconSize = 20;
 
 class HabitNameInput extends StatefulWidget {
   final GlobalKey<FormState> formKey;
+  final TextEditingController? controller;
   final String? Function(String?)? nameValidator;
   final void Function()? onPressed;
 
   const HabitNameInput(
-      {Key? key, required this.formKey, this.onPressed, this.nameValidator})
+      {Key? key,
+      required this.formKey,
+      this.controller,
+      this.onPressed,
+      this.nameValidator})
       : super(key: key);
 
   @override
@@ -21,32 +26,33 @@ class HabitNameInput extends StatefulWidget {
 class _HabitNameInputState extends State<HabitNameInput> {
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: widget.formKey,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-              child: SizedBox(
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+            child: Form(
+          key: widget.formKey,
+          child: SizedBox(
             height: _defaultItemHeight,
             child: AppFormField(
+                controller: widget.controller,
                 validator: widget.nameValidator,
                 hint: 'Enter habit name',
                 margin: EdgeInsets.zero),
-          )),
-          const SizedBox(width: 12),
-          SizedBox(
-            width: _defaultItemHeight,
-            height: _defaultItemHeight,
-            child: Stack(clipBehavior: Clip.none, children: [
-              _HabitInputButton(onPressed: widget.onPressed),
-              _ButtonMarker(
-                  icon: Icons.add,
-                  backgroundColor: Theme.of(context).colorScheme.primary)
-            ]),
-          )
-        ],
-      ),
+          ),
+        )),
+        const SizedBox(width: 12),
+        SizedBox(
+          width: _defaultItemHeight,
+          height: _defaultItemHeight,
+          child: Stack(clipBehavior: Clip.none, children: [
+            _HabitInputButton(onPressed: widget.onPressed),
+            _ButtonMarker(
+                icon: Icons.add,
+                backgroundColor: Theme.of(context).colorScheme.primary)
+          ]),
+        )
+      ],
     );
   }
 }

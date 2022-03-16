@@ -65,21 +65,20 @@ class _AppFormFieldState extends State<AppFormField> {
         obscureText: isObscured,
         style: textTheme.button?.copyWith(color: colorScheme.primary),
         decoration: InputDecoration(
-          prefixIcon: widget.icon == null
-              ? null
-              : _AppFormFieldIcon(
-                  iconData: widget.icon!,
-                  color: isFocused ? colorScheme.primary : hintColor),
-          suffixIcon: widget.isPassword ? _passwordVisibilityButton() : null,
-          filled: true,
-          fillColor: widget.backgroundColor ?? Colors.white,
-          hintStyle: textTheme.bodyText2?.copyWith(color: hintColor),
-          hintText: widget.hint,
-          contentPadding: const EdgeInsets.all(16),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none),
-        ),
+            prefixIcon: widget.icon == null
+                ? null
+                : _AppFormFieldIcon(
+                    iconData: widget.icon!,
+                    color: isFocused ? colorScheme.primary : hintColor),
+            suffixIcon: widget.isPassword ? _passwordVisibilityButton() : null,
+            filled: true,
+            fillColor: widget.backgroundColor ?? Colors.white,
+            hintStyle: textTheme.bodyText2?.copyWith(color: hintColor),
+            hintText: widget.hint,
+            contentPadding: const EdgeInsets.all(16),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none)),
       ),
     );
   }

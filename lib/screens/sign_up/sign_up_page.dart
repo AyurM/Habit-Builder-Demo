@@ -21,7 +21,7 @@ class _SignUpPageState extends BaseState<SignUpPage, SignUpCubit, SignUpState> {
       Scaffold(body: _buildScaffoldBody(state));
 
   Widget _buildScaffoldBody(SignUpState state) {
-    if (state is SignUpLoading) {
+    if (state is SignUpLoading || state is SignUpSuccess) {
       return const AppLoadingIndicator();
     }
     final Size size = MediaQuery.of(context).size;
@@ -54,16 +54,8 @@ class _SignUpPageState extends BaseState<SignUpPage, SignUpCubit, SignUpState> {
 
   @override
   void listener(BuildContext context, SignUpState state) {
-    if (state is SignUpContinueWithGoogle) {
-      context.showSnackBar(state.profile.toString(), clear: true);
-    }
-
-    if (state is SignUpContinueWithFacebook) {
-      context.showSnackBar(state.profile.toString(), clear: true);
-    }
-
-    if (state is SignUpCreatedAccount) {
-      context.showSnackBar(state.signUpData.toString(), clear: true);
+    if (state is SignUpSuccess) {
+      Navigator.pop(context, state.profile);
     }
 
     if (state is SignUpError) {
