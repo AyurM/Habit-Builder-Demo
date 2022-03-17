@@ -58,6 +58,8 @@ class HabitValueItem extends StatelessWidget {
   }
 }
 
+//rounded_triangle.svg from /assets/svg was converted to Path
+//by following this video: https://www.youtube.com/watch?v=P0eZ0XH5FdI
 class _HabitHalfValueItem extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {

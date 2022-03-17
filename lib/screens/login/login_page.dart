@@ -38,12 +38,12 @@ class _LoginPageState extends BaseState<LoginPage, LoginCubit, LoginState> {
           onLoginWithFacebook: cubit.onLoginWithFacebook,
           onLogin: cubit.onLogin,
           onSignUp: cubit.onSignUp,
+          onHelp: cubit.onHelpButtonPressed,
           onForgotPassword: cubit.onForgotPassword,
           emailValidator: cubit.emailValidator,
           passwordValidator: cubit.passwordValidator,
         ),
-      ),
-      _LoginPageHelpButton(onPressed: cubit.onHelpButtonPressed),
+      )
     ]);
   }
 
@@ -113,18 +113,14 @@ class _LoginPageHelpButton extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Positioned(
-        top: 48,
-        right: 24,
-        child: TextButton(
-          onPressed: onPressed,
-          style: TextButton.styleFrom(
-              minimumSize: Size(size, size),
-              backgroundColor: eclipse.withOpacity(0.2),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(size / 2))),
-          child: Text('?', style: Theme.of(context).textTheme.headline1),
-        ),
+  Widget build(BuildContext context) => TextButton(
+        onPressed: onPressed,
+        style: TextButton.styleFrom(
+            minimumSize: Size(size, size),
+            backgroundColor: eclipse.withOpacity(0.2),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(size / 2))),
+        child: Text('?', style: Theme.of(context).textTheme.headline1),
       );
 }
 
@@ -133,6 +129,7 @@ class _LoginPageForeground extends StatelessWidget {
   final void Function()? onLoginWithFacebook;
   final void Function()? onForgotPassword;
   final void Function()? onSignUp;
+  final void Function()? onHelp;
   final void Function(String, String)? onLogin;
   final String? Function(String?)? emailValidator;
   final String? Function(String?)? passwordValidator;
@@ -143,6 +140,7 @@ class _LoginPageForeground extends StatelessWidget {
     this.onLoginWithFacebook,
     this.onForgotPassword,
     this.onSignUp,
+    this.onHelp,
     this.onLogin,
     this.emailValidator,
     this.passwordValidator,
@@ -170,6 +168,12 @@ class _LoginPageForeground extends StatelessWidget {
             0.4
           ])),
       child: Column(children: [
+        Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 48, right: 24),
+              child: _LoginPageHelpButton(onPressed: onHelp),
+            )),
         const Expanded(child: SizedBox()),
         Padding(
           padding: kDefaultHorizontalPaddingMedium,

@@ -27,9 +27,7 @@ class _HabitBottomNavBarState extends State<HabitBottomNavBar> {
         child: Container(
           height: kDefaultBottomNavbarHeight,
           color: Colors.white,
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: _buildButtons()),
+          child: Row(children: _buildButtons()),
         ));
   }
 
@@ -46,6 +44,9 @@ class _HabitBottomNavBarState extends State<HabitBottomNavBar> {
           widget.navData[i].onPressed?.call();
         },
       ));
+      if (i == 1) {
+        buttons.add(const Expanded(child: SizedBox()));
+      }
     }
     return buttons;
   }
@@ -64,9 +65,13 @@ class _NavButton extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) => SizedBox.square(
-        dimension: kDefaultNavbarButtonSize,
+  Widget build(BuildContext context) => Container(
+        padding: const EdgeInsets.all(
+            (kDefaultBottomNavbarHeight - kDefaultIconButtonSize) / 2),
         child: IconButton(
+            padding: EdgeInsets.zero,
+            constraints: BoxConstraints.tight(
+                const Size.square(kDefaultNavbarButtonSize)),
             icon: ColorFiltered(
               colorFilter: _getColorFilter(),
               child: Image.asset(imagePath),
@@ -125,7 +130,7 @@ class _NavButton extends StatelessWidget {
   }
 }
 
-//navbar.svg from /assets/images was converted to Path
+//navbar.svg from /assets/svg was converted to Path
 //by following this video: https://www.youtube.com/watch?v=P0eZ0XH5FdI
 class _NavBarClipper extends CustomClipper<Path> {
   @override

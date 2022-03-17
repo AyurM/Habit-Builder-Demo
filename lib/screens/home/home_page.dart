@@ -46,9 +46,9 @@ class _HomePageState extends BaseState<HomePage, HomeCubit, HomeState> {
               _buildScaffoldBody(state),
               if (state is! HomeLoading)
                 _HomeFab(
-                    iconData: state is HomeAddNewHabitPressed
-                        ? Icons.check
-                        : Icons.add,
+                    assetPath: state is HomeAddNewHabitPressed
+                        ? 'assets/images/check.png'
+                        : 'assets/images/plus.png',
                     onPressed: cubit.onFabPressed)
             ],
           ),
@@ -122,13 +122,13 @@ class _HomePageBackground extends StatelessWidget {
 }
 
 class _HomeFab extends StatelessWidget {
-  final IconData iconData;
+  final String assetPath;
   final double size;
   final void Function()? onPressed;
 
   const _HomeFab(
       {Key? key,
-      required this.iconData,
+      required this.assetPath,
       this.onPressed,
       this.size = kDefaultFabSize})
       : super(key: key);
@@ -151,7 +151,8 @@ class _HomeFab extends StatelessWidget {
                 shape: const CircleBorder(),
                 elevation: 0.0,
                 onPressed: onPressed,
-                child: Icon(iconData, color: eclipse, size: size / 2),
+                child: Image.asset(assetPath,
+                    width: size / 3, height: size / 3, color: eclipse),
               ),
             ),
           ),
