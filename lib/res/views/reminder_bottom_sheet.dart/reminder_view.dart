@@ -8,7 +8,7 @@ class ReminderView extends StatefulWidget {
   final ReminderData data;
   final void Function(int, bool)? onChanged;
 
-  static DateFormat timeFormat = DateFormat('H:mm a');
+  static DateFormat timeFormat = DateFormat('h:mm a');
 
   const ReminderView({Key? key, required this.data, this.onChanged})
       : super(key: key);

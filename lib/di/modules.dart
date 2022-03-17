@@ -3,6 +3,7 @@ import 'package:habit_builder_demo/data/api/rest_api.dart';
 import 'package:habit_builder_demo/data/api/rest_api_interface.dart';
 import 'package:habit_builder_demo/data/repositories/auth_repository.dart';
 import 'package:habit_builder_demo/data/repositories/habit_repository.dart';
+import 'package:habit_builder_demo/res/views/add_reminder_bottom_sheet/add_reminder_dialog_cubit.dart';
 import 'package:habit_builder_demo/res/views/reminder_bottom_sheet.dart/reminder_list_cubit.dart';
 import 'package:habit_builder_demo/res/views/sign_up_form/sign_up_form_cubit.dart';
 import 'package:habit_builder_demo/screens/home/home_cubit.dart';
@@ -36,6 +37,7 @@ void registerCubits() {
   getIt.registerFactory(() => HomeCubit(get()));
   getIt.registerFactory(() => NewHabitCubit());
   getIt.registerFactory(() => ReminderListCubit());
+  getIt.registerFactory(() => AddReminderDialogCubit());
 }
 
 T get<T extends Object>() => getIt.get<T>();

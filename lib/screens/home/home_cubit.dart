@@ -52,12 +52,13 @@ class HomeCubit extends Cubit<HomeState> {
 
   void onCancelNewHabit() => emit(HomeCancelNewHabit());
 
-  void Function() onAppBarLeadingPressed(HomeState state) {
+  void onAppBarLeadingPressed() {
     if (state is HomeAddNewHabitPressed) {
-      return onCancelNewHabit;
+      onCancelNewHabit();
+      return;
     }
 
-    return onMenuPressed;
+    onMenuPressed();
   }
 
   void onSaveHabit() {
@@ -68,12 +69,13 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void Function() onFabPressed(HomeState state) {
+  void onFabPressed() {
     if (state is HomeAddNewHabitPressed) {
-      return onSaveHabit;
+      onSaveHabit();
+      return;
     }
 
-    return onAddNewHabit;
+    onAddNewHabit();
   }
 
   Future<bool> onBackPressed() async {

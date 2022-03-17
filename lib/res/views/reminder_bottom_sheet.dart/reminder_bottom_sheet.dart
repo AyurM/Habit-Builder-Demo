@@ -3,6 +3,7 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:habit_builder_demo/base/base_state.dart';
 import 'package:habit_builder_demo/res/colors/colors.dart';
 import 'package:habit_builder_demo/res/theme/constants.dart';
+import 'package:habit_builder_demo/res/views/add_reminder_bottom_sheet/add_reminder_bottom_sheet.dart';
 import 'package:habit_builder_demo/res/views/primary_text_button.dart';
 import 'package:habit_builder_demo/res/views/reminder_bottom_sheet.dart/reminder_list_cubit.dart';
 import 'package:habit_builder_demo/res/views/reminder_bottom_sheet.dart/reminder_view.dart';
@@ -34,7 +35,9 @@ class _ReminderBottomSheetState extends BaseState<ReminderBottomSheet,
                 (cubit.reminders.length / _defaultColumns).ceil(), (_) => auto),
             children: cubit.reminders
                 .map((reminderData) => ReminderView(
-                    data: reminderData, onChanged: cubit.onReminderChanged))
+                    key: ValueKey(reminderData.id),
+                    data: reminderData,
+                    onChanged: cubit.onReminderChanged))
                 .toList(),
           ),
         )),
@@ -67,9 +70,22 @@ class _ReminderBottomSheetState extends BaseState<ReminderBottomSheet,
       );
 
   @override
-  void listener(BuildContext context, ReminderListState state) {
+  Future<void> listener(BuildContext context, ReminderListState state) async {
     if (state is ReminderListOnItemChanged) {
       debugPrint('Reminder ${state.id} is ${state.active ? 'on' : 'off'}');
+    }
+
+    if (state is ReminderListAddReminder) {
+      await showModalBottomSheet(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+          ),
+          backgroundColor: Colors.white,
+          context: context,
+          builder: (context) =>
+              AddReminderDialog(onSelected: cubit.onReminderTimeSelected));
+      cubit.onAddReminderDialogClosed();
     }
   }
 }

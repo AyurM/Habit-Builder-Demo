@@ -14,8 +14,6 @@ import 'package:habit_builder_demo/screens/new_habit/new_habit_page.dart';
 import 'package:habit_builder_demo/utils/snackbar_utils.dart';
 
 class HomePage extends StatefulWidget {
-  static const String title = 'Homepage';
-
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -39,7 +37,7 @@ class _HomePageState extends BaseState<HomePage, HomeCubit, HomeState> {
             context: context,
             text: cubit.pageTitle,
             leadingIcon: _getAppBarLeadingIcon(state),
-            onLeadingPressed: cubit.onAppBarLeadingPressed(state),
+            onLeadingPressed: cubit.onAppBarLeadingPressed,
             trailing: _buildAppBarTrailing(state),
           ),
           body: Stack(
@@ -51,7 +49,7 @@ class _HomePageState extends BaseState<HomePage, HomeCubit, HomeState> {
                     iconData: state is HomeAddNewHabitPressed
                         ? Icons.check
                         : Icons.add,
-                    onPressed: cubit.onFabPressed(state))
+                    onPressed: cubit.onFabPressed)
             ],
           ),
           resizeToAvoidBottomInset: false,
@@ -85,6 +83,7 @@ class _HomePageState extends BaseState<HomePage, HomeCubit, HomeState> {
     }
 
     return UserAvatar(
+        backgroundColor: Colors.grey,
         imageUrl: 'https://randomuser.me/api/portraits/men/97.jpg',
         radius: kDefaultIconButtonSize / 2,
         onPressed: cubit.onProfilePressed);

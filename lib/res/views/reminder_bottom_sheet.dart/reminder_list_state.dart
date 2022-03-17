@@ -11,6 +11,17 @@ class ReminderListInitial extends ReminderListState {}
 
 class ReminderListAddReminder extends ReminderListState {}
 
+class ReminderListAddReminderDialogClosed extends ReminderListState {}
+
+class ReminderListItemAdded extends ReminderListState {
+  final ReminderData item;
+
+  const ReminderListItemAdded(this.item);
+
+  @override
+  List<Object> get props => [item];
+}
+
 class ReminderListOnItemChanged extends ReminderListState {
   final int id;
   final bool active;

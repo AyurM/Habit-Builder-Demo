@@ -8,6 +8,7 @@ class PrimaryTextButton extends StatelessWidget {
   final Size size;
   final Color? color;
   final EdgeInsets? margin;
+  final TextStyle? textStyle;
 
   const PrimaryTextButton(
       {Key? key,
@@ -16,7 +17,8 @@ class PrimaryTextButton extends StatelessWidget {
       this.borderRadius = 8.0,
       this.size = const Size(double.infinity, kDefaultButtonHeight),
       this.color,
-      this.margin})
+      this.margin,
+      this.textStyle})
       : super(key: key);
 
   @override
@@ -32,7 +34,8 @@ class PrimaryTextButton extends StatelessWidget {
               primary: color ?? Theme.of(context).colorScheme.primary,
               minimumSize: size),
           onPressed: onPressed,
-          child: Text(text, style: Theme.of(context).textTheme.button),
+          child: Text(text,
+              style: textStyle ?? Theme.of(context).textTheme.button),
         ),
       );
 }
