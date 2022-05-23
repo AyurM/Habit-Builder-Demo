@@ -123,36 +123,33 @@ class _HomePageBackground extends StatelessWidget {
 
 class _HomeFab extends StatelessWidget {
   final String assetPath;
-  final double size;
   final void Function()? onPressed;
 
-  const _HomeFab(
-      {Key? key,
-      required this.assetPath,
-      this.onPressed,
-      this.size = kDefaultFabSize})
+  const _HomeFab({Key? key, required this.assetPath, this.onPressed})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) => Positioned(
-        left: MediaQuery.of(context).size.width / 2 - size / 2,
+        left: MediaQuery.of(context).size.width / 2 - kDefaultFabSize / 2,
         bottom: kDefaultBottomNavbarHeight - 20,
         child: Container(
-          width: size,
-          height: size,
+          width: kDefaultFabSize,
+          height: kDefaultFabSize,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(size / 2),
+              borderRadius: BorderRadius.circular(kDefaultFabSize / 2),
               color: const Color(0xFFFC9D45).withOpacity(0.2)),
           child: Center(
             child: SizedBox.square(
-              dimension: size * 0.8125,
+              dimension: kDefaultFabSize * 0.8125,
               child: RawMaterialButton(
                 fillColor: const Color(0xFFFC9D45),
                 shape: const CircleBorder(),
                 elevation: 0.0,
                 onPressed: onPressed,
                 child: Image.asset(assetPath,
-                    width: size / 3, height: size / 3, color: eclipse),
+                    width: kDefaultFabSize / 3,
+                    height: kDefaultFabSize / 3,
+                    color: eclipse),
               ),
             ),
           ),

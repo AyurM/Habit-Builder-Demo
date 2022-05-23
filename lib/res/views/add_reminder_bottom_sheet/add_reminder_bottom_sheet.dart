@@ -67,18 +67,13 @@ class _AddReminderDialogState extends BaseState<AddReminderDialog,
 class _AddReminderDialogHeader extends StatelessWidget {
   final void Function()? onCancel;
   final void Function()? onSave;
-  final EdgeInsets padding;
 
-  const _AddReminderDialogHeader(
-      {Key? key,
-      this.onCancel,
-      this.onSave,
-      this.padding = const EdgeInsets.all(16)})
+  const _AddReminderDialogHeader({Key? key, this.onCancel, this.onSave})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: padding,
+        padding: const EdgeInsets.all(16),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

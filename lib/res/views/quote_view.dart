@@ -24,9 +24,9 @@ class QuoteView extends StatelessWidget {
 }
 
 class _QuoteImage extends StatelessWidget {
-  final double borderRadius;
-
-  const _QuoteImage({Key? key, this.borderRadius = 12}) : super(key: key);
+  const _QuoteImage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Positioned(
@@ -34,23 +34,15 @@ class _QuoteImage extends StatelessWidget {
       top: 0,
       bottom: 0,
       child: ClipRRect(
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(borderRadius),
-              bottomRight: Radius.circular(borderRadius)),
+          borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(12), bottomRight: Radius.circular(12)),
           child: Image.asset('assets/images/quote.png', fit: BoxFit.cover)));
 }
 
 class _QuoteText extends StatelessWidget {
   final Quote quote;
-  final double relativeWidth;
-  final EdgeInsets padding;
 
-  const _QuoteText(
-      {Key? key,
-      required this.quote,
-      this.relativeWidth = 0.7,
-      this.padding = const EdgeInsets.all(16)})
-      : super(key: key);
+  const _QuoteText({Key? key, required this.quote}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +50,8 @@ class _QuoteText extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) => Container(
-        padding: padding,
-        width: constraints.maxWidth * relativeWidth,
+        padding: const EdgeInsets.all(16),
+        width: constraints.maxWidth * 0.7,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

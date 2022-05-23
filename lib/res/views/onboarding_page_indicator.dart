@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:habit_builder_demo/res/colors/colors.dart';
 import 'package:habit_builder_demo/res/theme/constants.dart';
 
+const _kDotSize = 11.0;
+const _kSelectedDotSize = 13.0;
+const _kOutlinedDotSize = 17.0;
+
 class OnboardingPageIndicator extends StatelessWidget {
   final int pageIndex;
   final int totalPages;
@@ -52,36 +56,25 @@ class OnboardingPageIndicator extends StatelessWidget {
 class _IndicatorDot extends StatelessWidget {
   final bool isSelected;
   final bool isLast;
-  final double size;
-  final double selectedSize;
-  final double outlineSize;
-  final Color color;
-  final Color selectedColor;
 
-  const _IndicatorDot(
-      {Key? key,
-      this.isSelected = false,
-      this.isLast = false,
-      this.size = 11.0,
-      this.selectedSize = 13.0,
-      this.outlineSize = 17.0,
-      this.color = const Color(0xFFF9B566),
-      this.selectedColor = eclipse})
+  const _IndicatorDot({Key? key, this.isSelected = false, this.isLast = false})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final Widget dot = isSelected
-        ? _SelectedDot(
-            color: selectedColor, size: selectedSize, outlineSize: outlineSize)
-        : _DefaultDot(color: color, size: size);
+        ? const _SelectedDot(
+            color: eclipse,
+            size: _kSelectedDotSize,
+            outlineSize: _kOutlinedDotSize)
+        : const _DefaultDot(color: Color(0xFFF9B566), size: _kDotSize);
 
     if (isLast) {
       return dot;
     }
 
     final double paddingRight =
-        isSelected ? 8 - (outlineSize - selectedSize) / 2 : 8;
+        isSelected ? 8 - (_kOutlinedDotSize - _kSelectedDotSize) / 2 : 8;
     return Padding(padding: EdgeInsets.only(right: paddingRight), child: dot);
   }
 }

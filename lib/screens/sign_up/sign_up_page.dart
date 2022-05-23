@@ -82,9 +82,7 @@ class _SignUpPageHeader extends StatelessWidget {
 }
 
 class _SignUpDivider extends StatelessWidget {
-  final EdgeInsets? margin;
-
-  const _SignUpDivider({Key? key, this.margin}) : super(key: key);
+  const _SignUpDivider({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +90,7 @@ class _SignUpDivider extends StatelessWidget {
     final Widget divider = Expanded(child: Divider(color: color));
 
     return Padding(
-      padding: margin ?? kDefaultHorizontalPaddingMedium,
+      padding: kDefaultHorizontalPaddingMedium,
       child: Row(children: [
         divider,
         Padding(
@@ -112,10 +110,9 @@ class _SignUpDivider extends StatelessWidget {
 class _SignUpPageAuthOptions extends StatelessWidget {
   final void Function()? onLoginWithGoogle;
   final void Function()? onLoginWithFacebook;
-  final EdgeInsets? margin;
 
   const _SignUpPageAuthOptions(
-      {Key? key, this.onLoginWithGoogle, this.onLoginWithFacebook, this.margin})
+      {Key? key, this.onLoginWithGoogle, this.onLoginWithFacebook})
       : super(key: key);
 
   @override
@@ -124,7 +121,7 @@ class _SignUpPageAuthOptions extends StatelessWidget {
     const double iconSpacing = 8;
 
     return Padding(
-      padding: margin ?? kDefaultHorizontalPaddingMedium,
+      padding: kDefaultHorizontalPaddingMedium,
       child: Row(children: [
         Expanded(
           child: IconTextButton(
@@ -149,16 +146,14 @@ class _SignUpPageAuthOptions extends StatelessWidget {
 }
 
 class _SignUpPageFooter extends StatelessWidget {
-  final EdgeInsets? margin;
-
-  const _SignUpPageFooter({Key? key, this.margin}) : super(key: key);
+  const _SignUpPageFooter({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final TextStyle? textStyle = Theme.of(context).textTheme.bodyText1;
 
     return Padding(
-      padding: margin ?? kDefaultHorizontalPaddingMedium,
+      padding: kDefaultHorizontalPaddingMedium,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

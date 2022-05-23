@@ -16,8 +16,8 @@ dependencies:
   get_it: ^7.2.0
   equatable: ^2.0.3
   flutter_bloc: ^8.0.1
-  google_fonts: ^2.3.1
-  shared_preferences: ^2.0.13
+  google_fonts: ^3.0.0
+  shared_preferences: ^2.0.15
   intl: ^0.17.0
   flutter_layout_grid: ^1.0.6
 

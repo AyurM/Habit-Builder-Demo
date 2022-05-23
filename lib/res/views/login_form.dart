@@ -84,10 +84,8 @@ class _LoginPageFormState extends State<LoginPageForm> {
 class _LoginFormFooter extends StatelessWidget {
   final void Function()? onForgotPassword;
   final void Function()? onSignUp;
-  final EdgeInsets? margin;
 
-  const _LoginFormFooter(
-      {Key? key, this.onForgotPassword, this.onSignUp, this.margin})
+  const _LoginFormFooter({Key? key, this.onForgotPassword, this.onSignUp})
       : super(key: key);
 
   @override
@@ -99,7 +97,7 @@ class _LoginFormFooter extends StatelessWidget {
         tapTargetSize: MaterialTapTargetSize.shrinkWrap);
 
     return Padding(
-      padding: margin ?? kDefaultHorizontalPaddingMedium,
+      padding: kDefaultHorizontalPaddingMedium,
       child: Column(
         children: [
           TextButton(

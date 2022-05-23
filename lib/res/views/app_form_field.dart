@@ -100,15 +100,9 @@ class _AppFormFieldState extends State<AppFormField> {
 class _AppFormFieldIcon extends StatelessWidget {
   final IconData iconData;
   final Color color;
-  final double spacing;
-  final Size size;
 
   const _AppFormFieldIcon(
-      {Key? key,
-      required this.iconData,
-      required this.color,
-      this.spacing = 16.0,
-      this.size = const Size(48, 56)})
+      {Key? key, required this.iconData, required this.color})
       : super(key: key);
 
   @override
@@ -116,16 +110,16 @@ class _AppFormFieldIcon extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: size.width,
-            height: size.height,
+            width: 48,
+            height: 56,
             decoration: BoxDecoration(
                 border: Border(
                     right: BorderSide(
                         color: Theme.of(context).colorScheme.background))),
             child: Icon(iconData, color: color),
           ),
-          SizedBox(
-            width: spacing,
+          const SizedBox(
+            width: 16.0,
           )
         ],
       );

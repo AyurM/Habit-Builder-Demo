@@ -62,10 +62,7 @@ class _ResetPasswordPageState extends BaseState<ResetPasswordPage,
 }
 
 class _ResetPasswordPageBackButton extends StatelessWidget {
-  final double size;
-
-  const _ResetPasswordPageBackButton({Key? key, this.size = 44.0})
-      : super(key: key);
+  const _ResetPasswordPageBackButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +71,7 @@ class _ResetPasswordPageBackButton extends StatelessWidget {
         child: Padding(
             padding: const EdgeInsets.only(left: 20, top: 48),
             child: AppIconButton(
-                size: size,
+                size: 44,
                 iconData: Icons.arrow_back,
                 onPressed: () => Navigator.pop(context))));
   }
@@ -156,16 +153,14 @@ class _ResetPasswordFormState extends State<_ResetPasswordForm> {
 }
 
 class _ResetPasswordPageFooter extends StatelessWidget {
-  final EdgeInsets? margin;
-
-  const _ResetPasswordPageFooter({Key? key, this.margin}) : super(key: key);
+  const _ResetPasswordPageFooter({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final TextStyle? textStyle = Theme.of(context).textTheme.bodyText1;
 
     return Padding(
-      padding: margin ?? kDefaultHorizontalPaddingMedium,
+      padding: kDefaultHorizontalPaddingMedium,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

@@ -107,19 +107,17 @@ class _LoginPageBackground extends StatelessWidget {
 
 class _LoginPageHelpButton extends StatelessWidget {
   final void Function()? onPressed;
-  final double size;
 
-  const _LoginPageHelpButton({Key? key, this.onPressed, this.size = 44})
-      : super(key: key);
+  const _LoginPageHelpButton({Key? key, this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-            minimumSize: Size(size, size),
+            minimumSize: const Size(44, 44),
             backgroundColor: eclipse.withOpacity(0.2),
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(size / 2))),
+                borderRadius: BorderRadius.circular(44 / 2))),
         child: Text('?', style: Theme.of(context).textTheme.headline1),
       );
 }

@@ -10,6 +10,7 @@ import 'package:habit_builder_demo/res/views/reminder_bottom_sheet.dart/reminder
 import 'package:habit_builder_demo/screens/new_habit/new_habit_cubit.dart';
 
 const double _defaultSpacing = 8;
+const double _kImageRadius = 35.0;
 
 class NewHabitPage extends StatefulWidget {
   final GlobalKey<FormState> formKey;
@@ -98,9 +99,7 @@ class _NotificationSetting extends StatelessWidget {
 }
 
 class _AddHabitHint extends StatelessWidget {
-  final double imageRadius;
-
-  const _AddHabitHint({Key? key, this.imageRadius = 35}) : super(key: key);
+  const _AddHabitHint({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -115,17 +114,17 @@ class _AddHabitHint extends StatelessWidget {
           alignment: Alignment.center,
           clipBehavior: Clip.none,
           children: [
-            Positioned(
-              top: -imageRadius,
+            const Positioned(
+              top: -_kImageRadius,
               child: CircleAvatar(
-                radius: imageRadius,
+                radius: _kImageRadius,
                 backgroundColor: Colors.transparent,
-                foregroundImage:
-                    const AssetImage('assets/images/hint_image.png'),
+                foregroundImage: AssetImage('assets/images/hint_image.png'),
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(32, imageRadius + 16, 32, 16),
+              padding:
+                  const EdgeInsets.fromLTRB(32, _kImageRadius + 16, 32, 16),
               child: Column(
                 children: [
                   Text('Start this habit',

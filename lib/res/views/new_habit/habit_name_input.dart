@@ -59,23 +59,16 @@ class _HabitNameInputState extends State<HabitNameInput> {
 
 class _HabitInputButton extends StatelessWidget {
   final void Function()? onPressed;
-  final Color backgroundColor;
-  final double size;
 
-  const _HabitInputButton(
-      {Key? key,
-      this.onPressed,
-      this.backgroundColor = Colors.white,
-      this.size = _defaultItemHeight})
-      : super(key: key);
+  const _HabitInputButton({Key? key, this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
             padding: EdgeInsets.zero,
-            primary: backgroundColor,
-            minimumSize: Size.square(size),
+            primary: Colors.white,
+            minimumSize: const Size.square(_defaultItemHeight),
             elevation: 0,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12))),
@@ -86,16 +79,9 @@ class _HabitInputButton extends StatelessWidget {
 
 class _ButtonMarker extends StatelessWidget {
   final IconData icon;
-  final Color iconColor;
   final Color? backgroundColor;
-  final double size;
 
-  const _ButtonMarker(
-      {Key? key,
-      required this.icon,
-      this.backgroundColor,
-      this.iconColor = Colors.white,
-      this.size = _defaultMarkerIconSize})
+  const _ButtonMarker({Key? key, required this.icon, this.backgroundColor})
       : super(key: key);
 
   @override
@@ -103,10 +89,10 @@ class _ButtonMarker extends StatelessWidget {
       top: -4,
       right: -4,
       child: Container(
-        width: size,
-        height: size,
+        width: _defaultMarkerIconSize,
+        height: _defaultMarkerIconSize,
         decoration: BoxDecoration(
             color: backgroundColor, borderRadius: BorderRadius.circular(10)),
-        child: Icon(icon, color: iconColor, size: 16),
+        child: Icon(icon, color: Colors.white, size: 16),
       ));
 }
